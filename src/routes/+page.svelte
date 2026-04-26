@@ -4,12 +4,17 @@
 
   let directories;
   let files;
-  async function browsedirectories() {
-    let ReturningData = await invoke("browse_direcotries");
-    directories = ReturningData.directories;
-    files = ReturningData.files;
-  }
   browsedirectories();
+
+  async function browsedirectories() {
+    let responsedata = await invoke("browse_direcotries");
+    directories = responsedata.directories;
+    files = responsedata.files;
+  }
+  function splitFileNameIntoArray(fileName: string) {
+    let fileNameArray = fileName.split(".");
+    return fileNameArray;
+  }
 </script>
 <main class="titlemain">
   <h1>Better Explorer</h1>
@@ -17,10 +22,10 @@
 </main>
 <main class="container">
   {#each directories as directory}
-    <a>{directory}</a>
+    <a>Folder : {directory}</a>
   {/each}
   {#each files as file}
-    <a>{file}</a>
+    <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
   {/each}
 </main>
 
