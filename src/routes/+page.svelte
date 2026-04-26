@@ -1,5 +1,6 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/core";
+    import { mount } from "svelte";
 
   let directories;
   let files;
@@ -7,17 +8,19 @@
     let ReturningData = await invoke("browse_direcotries");
     directories = ReturningData.directories;
     files = ReturningData.files;
-    console.log(directories);
   }
+  browsedirectories();
 </script>
-
+<main class="titlemain">
+  <h1>Better Explorer</h1>
+  <p>Current Directory: </p>
+</main>
 <main class="container">
-  <button onclick={browsedirectories}>Browse Directories</button>
   {#each directories as directory}
-    <p>{directory}</p>
+    <a>{directory}</a>
   {/each}
   {#each files as file}
-    <p>{file}</p>
+    <a>{file}</a>
   {/each}
 </main>
 
@@ -38,16 +41,19 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.container a {
+  border: 1px solid darkslategrey;
+  width: auto;
+  padding: 0.6em 1.2em;
+}
 .container {
   margin: 0;
-  padding-top: 10vh;
+  padding-top: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
+  text-align: unset;
 }
-
-
 
 button {
   border-radius: 8px;
