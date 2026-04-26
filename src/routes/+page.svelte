@@ -1,7 +1,7 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/core";
 
-  const IgnoreHiddenFiles = true;
+  const IgnoreHiddenFiles = false;
   let directories;
   let files;
   browsedirectories();
@@ -17,9 +17,7 @@
   }
   // Logging Hidden files for better debugging
   function loghidden(fileName: string) {
-    if (splitFileNameIntoArray(fileName)[0] == "") {
-      console.log("Hidden file: " + fileName);
-    }
+    console.log("Hidden file: " + fileName);
     return "Hi";
   }
 </script>
@@ -32,10 +30,16 @@
     <a>Folder : {directory}</a>
   {/each}
   {#each files as file}
-    {#if IgnoreHiddenFiles}
-      {#if splitFileNameIntoArray(file)[0] !== ""}
+    {#if splitFileNameIntoArray(file)[0] !== ""}
+      {#if IgnoreHiddenFiles}
          <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
       {/if}
+      {#if !IgnoreHiddenFiles}
+         {loghidden(file)}
+      {/if}
+    {/if}
+    {#if !splitFileNameIntoArray(file)[0] !== ""}
+    <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
     {/if}
   {/each}
 </main>
