@@ -14,13 +14,24 @@
     files = responsedata.files;
     currentDirectory = responsedata.current_directory;
   }
+
   function splitFileNameIntoArray(fileName: string) {
     let fileNameArray = fileName.split(".");
     return fileNameArray;
   }
+
   // Logging Hidden files for better debugging
   function loghidden(fileName: string) {
     console.log("Hidden file: " + fileName);
+  }
+   function moveToDirectory(foldername: string) {
+    console.log("Moving to directory: " + foldername);
+    let newdirectory = currentDirectory + "\\" + foldername;
+    console.log("New directory: " + newdirectory);
+    let responsedata:any =invoke("update_current_directory", { newDirectory: newdirectory });
+    directories = responsedata.directories;
+    files = responsedata.files;
+    currentDirectory = responsedata.current_directory;
   }
 </script>
 <main class="titlemain">
@@ -29,7 +40,7 @@
 </main>
 <main class="container">
   {#each directories as directory}
-    <a>Folder : {directory}</a>
+    <button on:click={() => moveToDirectory(directory)}>Folder : {directory}</button>
   {/each}
   {#each files as file}
     <!-- Since Code is getting complex i am gonna rewrite this in easy and comments -->
