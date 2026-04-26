@@ -3,13 +3,13 @@
 
   const IgnoreHiddenFiles = false; // This is a constant that determines whether to ignore hidden files or not.
 
-  let currentDirectory;
-  let directories;
-  let files;
+  let currentDirectory: any;
+  let directories: any;
+  let files: any;
   browsedirectories();
 
   async function browsedirectories() {
-    let responsedata = await invoke("browse_direcotries");
+    let responsedata:any = await invoke("browse_direcotries");
     directories = responsedata.directories;
     files = responsedata.files;
     currentDirectory = responsedata.current_directory;
