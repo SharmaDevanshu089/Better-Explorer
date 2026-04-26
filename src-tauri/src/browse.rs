@@ -1,3 +1,4 @@
+use dirs::home_dir;
 use serde::Serialize;
 use std::fs;
 use std::path::PathBuf;
@@ -10,7 +11,8 @@ pub struct ReturningData {
 
 #[tauri::command]
 pub async fn browse_direcotries() -> Result<ReturningData, String> {
-    let directories_iterator = fs::read_dir(".").expect("Unable to read current directory");
+    let directories_iterator =
+        fs::read_dir(home_dir().unwrap()).expect("Unable to read current directory");
     let mut directories = Vec::new();
     let mut files = Vec::new();
     for dirtectory in directories_iterator {

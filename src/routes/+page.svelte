@@ -1,7 +1,7 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/core";
-    import { mount } from "svelte";
 
+  const IgnoreHiddenFiles = true;
   let directories;
   let files;
   browsedirectories();
@@ -15,6 +15,13 @@
     let fileNameArray = fileName.split(".");
     return fileNameArray;
   }
+  // Logging Hidden files for better debugging
+  function loghidden(fileName: string) {
+    if (splitFileNameIntoArray(fileName)[0] == "") {
+      console.log("Hidden file: " + fileName);
+    }
+    return "Hi";
+  }
 </script>
 <main class="titlemain">
   <h1>Better Explorer</h1>
@@ -25,7 +32,15 @@
     <a>Folder : {directory}</a>
   {/each}
   {#each files as file}
+    {#each files as file}
+    {loghidden(file)}
     <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
+  {/each}
+    <!-- {#if IgnoreHiddenFiles}
+      {#if splitFileNameIntoArray(file)[0] !== ""}
+         <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
+      {/if}
+    {/if} -->
   {/each}
 </main>
 
