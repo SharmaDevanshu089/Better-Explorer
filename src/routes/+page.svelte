@@ -2,6 +2,8 @@
   import { invoke } from "@tauri-apps/api/core";
 
   const IgnoreHiddenFiles = false; // This is a constant that determines whether to ignore hidden files or not.
+
+  let currentDirectory;
   let directories;
   let files;
   browsedirectories();
@@ -10,6 +12,7 @@
     let responsedata = await invoke("browse_direcotries");
     directories = responsedata.directories;
     files = responsedata.files;
+    currentDirectory = responsedata.current_directory;
   }
   function splitFileNameIntoArray(fileName: string) {
     let fileNameArray = fileName.split(".");
@@ -22,7 +25,7 @@
 </script>
 <main class="titlemain">
   <h1>Better Explorer</h1>
-  <p>Current Directory: </p>
+  <p>Current Directory: {currentDirectory}</p>
 </main>
 <main class="container">
   {#each directories as directory}

@@ -5,6 +5,7 @@ use std::path::PathBuf;
 
 #[derive(Serialize)]
 pub struct ReturningData {
+    current_directory: PathBuf,
     directories: Vec<PathBuf>,
     files: Vec<PathBuf>,
 }
@@ -28,6 +29,7 @@ pub async fn browse_direcotries() -> Result<ReturningData, String> {
     let returning_instance = ReturningData {
         directories: directories,
         files: files,
+        current_directory: home_dir().unwrap(),
     };
 
     Ok(returning_instance)
