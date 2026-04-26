@@ -32,15 +32,11 @@
     <a>Folder : {directory}</a>
   {/each}
   {#each files as file}
-    {#each files as file}
-    {loghidden(file)}
-    <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
-  {/each}
-    <!-- {#if IgnoreHiddenFiles}
+    {#if IgnoreHiddenFiles}
       {#if splitFileNameIntoArray(file)[0] !== ""}
          <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
       {/if}
-    {/if} -->
+    {/if}
   {/each}
 </main>
 
