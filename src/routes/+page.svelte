@@ -1,7 +1,7 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/core";
 
-  const IgnoreHiddenFiles = false;
+  const IgnoreHiddenFiles = false; // This is a constant that determines whether to ignore hidden files or not.
   let directories;
   let files;
   browsedirectories();
@@ -18,7 +18,6 @@
   // Logging Hidden files for better debugging
   function loghidden(fileName: string) {
     console.log("Hidden file: " + fileName);
-    return "Hi";
   }
 </script>
 <main class="titlemain">
@@ -30,17 +29,25 @@
     <a>Folder : {directory}</a>
   {/each}
   {#each files as file}
-    {#if splitFileNameIntoArray(file)[0] !== ""}
+    <!-- Since Code is getting complex i am gonna rewrite this in easy and comments -->
+    <!-- lets just say we have read a file , i need to check if we need to even hide files or not -->
+     {#if !IgnoreHiddenFiles}
+     <!-- We dont need to hide files -->
+      <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
+      {/if}
       {#if IgnoreHiddenFiles}
+      <!-- We need to hide files -->
+      <!-- Check if it meets criteria -->
+        {#if !file.startsWith(".")}
+        <!-- yes the file doesnt meet criteria -->
          <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
+        {/if}
+        {#if file.startsWith(".")}
+        <!--  the file meets criteria just gonna log it-->
+          {loghidden(file)}
+        {/if}
       {/if}
-      {#if !IgnoreHiddenFiles}
-         {loghidden(file)}
-      {/if}
-    {/if}
-    {#if !splitFileNameIntoArray(file)[0] !== ""}
-    <a>File : {splitFileNameIntoArray(file)[0]} of type  {splitFileNameIntoArray(file)[1]}</a>
-    {/if}
+
   {/each}
 </main>
 
