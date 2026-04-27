@@ -3,7 +3,7 @@ use serde::Serialize;
 use std::fs;
 use std::path::PathBuf;
 
-#[derive(Serialize)]
+#[derive(Serialize, Debug)]
 pub struct ReturningData {
     current_directory: PathBuf,
     directories: Vec<PathBuf>,
@@ -53,6 +53,6 @@ pub async fn update_current_directory(new_directory: PathBuf) -> Result<Returnin
         files: files,
         current_directory: PathBuf::from(new_directory),
     };
-
+    println!("Returning instance: {:?}", returning_instance);
     Ok(returning_instance)
 }

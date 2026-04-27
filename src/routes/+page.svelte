@@ -24,14 +24,16 @@
   function loghidden(fileName: string) {
     console.log("Hidden file: " + fileName);
   }
-   function moveToDirectory(foldername: string) {
+  async function moveToDirectory(foldername: string) {
     console.log("Moving to directory: " + foldername);
     let newdirectory = currentDirectory + "\\" + foldername;
     console.log("New directory: " + newdirectory);
-    let responsedata:any =invoke("update_current_directory", { newDirectory: newdirectory });
+    let responsedata:any = await invoke("update_current_directory", { newDirectory: newdirectory });
+    console.log("Response data: " + responsedata);
     directories = responsedata.directories;
     files = responsedata.files;
     currentDirectory = responsedata.current_directory;
+    console.log("Updated current directory: " + currentDirectory);
   }
 </script>
 <main class="titlemain">
