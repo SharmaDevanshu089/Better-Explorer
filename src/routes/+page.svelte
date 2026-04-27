@@ -7,6 +7,7 @@
   let directories: any;
   let files: any;
   browsedirectories();
+  invoke("get_titlebar_color");
 
   async function browsedirectories() {
     let responsedata:any = await invoke("browse_direcotries");

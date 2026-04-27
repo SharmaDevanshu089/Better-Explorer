@@ -13,7 +13,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             greet,
             browse::browse_direcotries,
-            browse::update_current_directory
+            browse::update_current_directory,
+            initial_setup::get_titlebar_color
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
