@@ -1,4 +1,5 @@
 mod browse;
+mod initial_setup;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
