@@ -12,9 +12,10 @@
   "app": {
     "windows": [
       {
-        "title": "better-explorer",
+        "title": "Better Explorer",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "transparent": true
       }
     ],
     "security": {
